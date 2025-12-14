@@ -1,19 +1,20 @@
 import GlassCard from "../components/GlassCard";
 import axios from "axios";
+=
 
 export default function Donate() {
   const donate = async (e) => {
     e.preventDefault();
     const f = e.target;
 
-    const res = await axios.post(
-      "http://localhost:5000/api/donation/create-checkout-session",
-      {
-        amount: Number(f.amount.value),
-        donorName: f.name.value,
-        donorEmail: f.email.value,
-      }
-    );
+const res = await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/donation/create-checkout-session`,
+  {
+    amount: Number(f.amount.value),
+    donorName: f.name.value,
+    donorEmail: f.email.value,
+  }
+);
 
     window.location.href = res.data.url;
   };

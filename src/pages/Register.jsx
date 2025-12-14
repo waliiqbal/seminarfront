@@ -6,33 +6,55 @@ export default function Register() {
     e.preventDefault();
     const f = e.target;
 
-try {
-  await axios.post("http://localhost:5000/api/users", {
-    name,
-    email,
-    phone,
-  });
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/users`,
+        {
+          name: f.name.value,
+          email: f.email.value,
+          phone: f.phone.value,
+        }
+      );
 
-  window.location.href = "/thanks";
-} catch (err) {
-  if (err.response?.status === 409) {
-    alert("You have already submitted the form");
-  } else {
-    alert("Something went wrong. Please try again.");
-  }
+      window.location.href = "/thanks";
+    } catch (err) {
+      console.log("yha aya error me ", err);
 
-}
-  }
+      if (err.response?.status === 409) {
+        alert("You have already submitted the form");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    }
+  };
 
   return (
     <GlassCard>
       <form onSubmit={submit}>
-        <input name="name" placeholder="Name" required />
-        <input name="email" type="email" placeholder="Email Address" required />
-        <input name="phone" placeholder="Phone #" required />
+        <input
+          name="name"
+          placeholder="Name"
+          required
+        />
+
+        <input
+          name="email"
+          type="email"
+          placeholder="Email Address"
+          required
+        />
+
+        <input
+          name="phone"
+          placeholder="Phone #"
+          required
+        />
 
         <div className="button-row">
-          <button className="btn btn-submit" type="submit">
+          <button
+            className="btn btn-submit"
+            type="submit"
+          >
             SUBMIT
           </button>
 
@@ -48,4 +70,3 @@ try {
     </GlassCard>
   );
 }
-
