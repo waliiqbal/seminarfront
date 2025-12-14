@@ -1,6 +1,5 @@
 import GlassCard from "../components/GlassCard";
 import axios from "axios";
-=
 
 export default function Donate() {
   const donate = async (e) => {
